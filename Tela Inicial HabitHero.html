@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=375px, initial-scale=1.0">
+<title>HabitHero</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>:where([class^="ri-"])::before { content: "\f3c2"; }</style>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#6366F1',
+secondary: '#60A5FA'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+</head>
+<body class="bg-gray-900 w-[375px] min-h-[762px] mx-auto relative text-gray-100">
+<nav class="fixed top-0 w-full bg-gray-800 shadow-sm z-50 px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="text-white font-bold">12</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium">Nível 12</span>
+<div class="w-20 h-1.5 bg-gray-700 rounded-full">
+<div class="w-3/4 h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-heart-3-fill text-red-500 text-xl"></i>
+</div>
+<span class="font-medium">85/100</span>
+</div>
+</nav>
+<main class="pt-16 pb-20 px-4">
+<div class="flex flex-col items-center mb-6 mt-4">
+<img src="https://public.readdy.ai/ai/img_res/cc96cbde4d6af79d88c9896ecb9b504a.jpg" class="w-24 h-24 rounded-full mb-2" alt="Avatar">
+<h2 class="text-lg font-medium">Gabriel Santos</h2>
+<p class="text-sm text-gray-500">Guerreiro Nível 12</p>
+</div>
+<div class="bg-gray-800 rounded-lg p-4 mb-6 shadow-sm border border-gray-700">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-medium">Missão Atual</h3>
+<span class="text-sm text-primary">2/3 completadas</span>
+</div>
+<img src="https://public.readdy.ai/ai/img_res/b99a38cbb9f92b7093c97c2f35d6284e.jpg" class="w-full h-32 object-contain mb-4" alt="Monster">
+<h4 class="text-center font-medium mb-2">Monstro da Procrastinação</h4>
+<div class="w-full h-2 bg-gray-700 rounded-full">
+<div class="w-2/3 h-full bg-primary rounded-full"></div>
+</div>
+</div>
+<div class="bg-gray-800 rounded-lg p-4 shadow-sm border border-gray-700">
+<h3 class="font-medium mb-4">Hábitos Diários</h3>
+<div class="space-y-4" id="habits-list">
+</div>
+</div>
+</main>
+<nav class="fixed bottom-0 w-full bg-gray-800 border-t border-gray-700">
+<div class="grid grid-cols-4 gap-1 px-2">
+<button class="flex flex-col items-center py-2 text-primary">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-home-5-line"></i>
+</div>
+<span class="text-xs mt-1">Início</span>
+</button>
+<button class="flex flex-col items-center py-2 text-gray-400">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-sword-line"></i>
+</div>
+<span class="text-xs mt-1">Missões</span>
+</button>
+<button class="flex flex-col items-center py-2 text-gray-400">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-group-line"></i>
+</div>
+<span class="text-xs mt-1">Social</span>
+</button>
+<button class="flex flex-col items-center py-2 text-gray-400">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-user-line"></i>
+</div>
+<span class="text-xs mt-1">Perfil</span>
+</button>
+</div>
+</nav>
+<script>
+const habits = [
+{
+id: 1,
+name: 'Exercício Matinal',
+icon: 'ri-run-line',
+streak: 5,
+completed: false
+},
+{
+id: 2,
+name: 'Meditar 10min',
+icon: 'ri-mental-health-line',
+streak: 3,
+completed: true
+},
+{
+id: 3,
+name: 'Ler 30min',
+icon: 'ri-book-open-line',
+streak: 7,
+completed: false
+},
+{
+id: 4,
+name: 'Beber Água',
+icon: 'ri-water-flash-line',
+streak: 4,
+completed: false
+}
+];
+const habitsList = document.getElementById('habits-list');
+habits.forEach(habit => {
+const habitElement = document.createElement('div');
+habitElement.className = 'flex items-center justify-between p-3 bg-gray-700 rounded-lg';
+habitElement.innerHTML = `
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 flex items-center justify-center bg-gray-800 rounded-full shadow-sm">
+<i class="${habit.icon}"></i>
+</div>
+<div>
+<h4 class="font-medium">${habit.name}</h4>
+<p class="text-xs text-gray-400">🔥 ${habit.streak} dias seguidos</p>
+</div>
+</div>
+<button class="w-6 h-6 flex items-center justify-center rounded-full ${habit.completed ? 'bg-primary text-white' : 'bg-gray-800 border border-gray-700'}" onclick="toggleHabit(${habit.id})">
+${habit.completed ? '<i class="ri-check-line"></i>' : ''}
+</button>
+`;
+habitsList.appendChild(habitElement);
+});
+function toggleHabit(id) {
+const habit = habits.find(h => h.id === id);
+habit.completed = !habit.completed;
+const habitElements = document.querySelectorAll('#habits-list > div');
+const habitElement = habitElements[habits.indexOf(habit)];
+const button = habitElement.querySelector('button');
+if(habit.completed) {
+button.classList.remove('bg-white', 'border-gray-200');
+button.classList.add('bg-primary', 'text-white');
+button.innerHTML = '<i class="ri-check-line"></i>';
+} else {
+button.classList.remove('bg-primary', 'text-white');
+button.classList.add('bg-white', 'border-gray-200');
+button.innerHTML = '';
+}
+}
+</script>
+</body>
+</html>
